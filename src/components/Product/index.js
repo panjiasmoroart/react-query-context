@@ -24,12 +24,14 @@ const Product = () => {
     });
   }
 
+  console.log(JSON.stringify(data));
+
   return (
     <Container maxW="container.lg">
       <Heading fontSize="4xl" mb={5}>
         Product Best Seller
       </Heading>
-      {false && isLoading && (
+      {isLoading && (
         <Spinner
           thickness="4px"
           emptyColor="gray.200"
@@ -44,16 +46,17 @@ const Product = () => {
         gridGap="4"
         gridTemplateColumns="repeat(auto-fit,minmax(20rem,1fr))"
       >
-        {data?.map((product) => (
-          <GridItem
-            key={product._id}
-            display="flex"
-            justifyContent="center"
-            margin="2"
-          >
-            <ProductItem product={product} loading={isLoading} />
-          </GridItem>
-        ))}
+        {data &&
+          data.products.map((product) => (
+            <GridItem
+              key={product._id}
+              display="flex"
+              justifyContent="center"
+              margin="2"
+            >
+              <ProductItem product={product} loading={isLoading} />
+            </GridItem>
+          ))}
       </Grid>
     </Container>
   );
